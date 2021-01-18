@@ -1,0 +1,201 @@
+
+#include <stdio.h>
+#include<math.h>
+int main()
+{
+    int rowMatrixA,colMatrixA,rowMatrixB,colMatrixB;
+    int i,j,k;
+    rowMatrixA = 0;
+    colMatrixA = 0;
+    rowMatrixB = 0;
+    colMatrixB = 0;
+    /*Nhap so hang ma tran A*/
+    do
+    {
+        if (rowMatrixA >= 0)
+        {
+            printf(" Enter the row number of Matrix A:");
+            scanf("%d", &rowMatrixA); 
+        }
+        else 
+        {
+            printf("The row number of Matrix A must be a positive integer:\n Re-enter the row number of Matrix A:");
+            scanf("%d", &rowMatrixA); 
+        }
+        
+    }while (rowMatrixA < 0);
+    
+    /*Nhap so cot ma tran A*/
+    
+    do
+    {
+        if (colMatrixA >= 0)
+        {
+            printf(" Enter the column number of Matrix A:");
+            scanf("%d", &colMatrixA); 
+        }
+        else 
+        {
+            printf("The column number of Matrix A must be a positive integer:\n Re-enter the column number of Matrix A:");
+            scanf("%d", &colMatrixA); 
+        }
+        
+    }while (colMatrixA < 0);
+    
+    /*Nhap phan tu ma tran A*/
+    int MatrixA[rowMatrixA][colMatrixA];
+    for (int i = 0; i < rowMatrixA; i++)
+    {
+        for (int j = 0; j < colMatrixA; j++)
+        {
+            printf("The element of Matrix A %d,%d is:",(i+1),(j+1));
+            scanf("%d", &MatrixA[i][j]);
+        }
+    }
+ 
+    /*Nhap so hang ma tran B*/
+    do
+    {
+        if (rowMatrixB >= 0)
+        {
+            printf(" Enter the row number of Matrix B:");
+            scanf("%d", &rowMatrixB); 
+        }
+        else 
+        {
+            printf("The row number of Matrix B must be a positive integer:\n Re-enter the row number of Matrix B:");
+            scanf("%d", &rowMatrixB); 
+        }
+        
+    }while (rowMatrixB < 0);
+    
+    /*Nhap so cot ma tran B*/  
+    do
+    {
+        if (colMatrixB >= 0)
+        {
+            printf(" Enter the column number of Matrix B:");
+            scanf("%d", &colMatrixB); 
+        }
+        else 
+        {
+            printf("The column number of Matrix B must be a positive integer:\n Re-enter the column number of Matrix B:");
+            scanf("%d", &colMatrixB); 
+        }
+        
+    }while (colMatrixB < 0);
+    
+
+    
+    int MatrixB[rowMatrixB][colMatrixB];
+    for (int i = 0; i < rowMatrixB; i++)
+    {
+        for (int j = 0; j < colMatrixB; j++)
+        {
+            printf("The element of Matrix B %d,%d is:",(i+1),(j+1));
+            scanf("%d", &MatrixB[i][j]);
+        }
+    }
+    
+    /*Lua chon phep tinh*/
+        int pheptinh;
+        printf("Lua chon phep tinh cho ma hai ma tran: \n");
+        printf("Nhap 1 voi phep cong \n");
+        printf("Nhap 2 voi phep tru \n");
+        printf("Nhap 31 voi phep nhan A cho B \n");
+        printf("Nhap 32 voi phep nhan B cho A \n");
+        scanf("%d", &pheptinh);
+    
+   
+    if ( pheptinh == 1 )        /*Phep cong*/
+    {
+        if ((rowMatrixA=rowMatrixB) && (colMatrixA=colMatrixB))
+        {
+            int MatrixC[rowMatrixA][colMatrixB];
+            int tong,a,b;
+            for (int i = 0; i < rowMatrixA; i++)
+            {
+                for (j = 0; j < colMatrixA; j++)
+                {
+                    MatrixC[i][j]= MatrixA[i][j]+MatrixB[i][j];
+                    printf("%d ",MatrixC[i][j]);
+                }
+                printf("\n");
+            }
+        }
+        else 
+            printf("Khong thuc hien duoc phep cong vi hai ma tran ko cung kich thuoc \n ");
+    }
+    else if ( pheptinh == 2 )       /*Phep tru*/
+    {
+         if ((rowMatrixA=rowMatrixB) && (colMatrixA=colMatrixB))
+        {
+            int MatrixC[rowMatrixA][colMatrixB];
+            int tong,a,b;
+            for (int i = 0; i < rowMatrixA; i++)
+            {
+                for (j = 0; j < colMatrixA; j++)
+                {
+                    MatrixC[i][j]= MatrixA[i][j]-MatrixB[i][j];
+                    printf("%d ",MatrixC[i][j]);
+                }
+                printf("\n");
+            }
+        }
+        else 
+            printf("Khong thuc hien duoc phep tru vi hai ma tran ko cung kich thuoc \n ");
+    }
+    else if ( pheptinh == 31 );      /*Phep nhan A vs B*/
+    {
+        int MatrixC[rowMatrixA][colMatrixB];
+        if (colMatrixA == rowMatrixB)
+        {
+            for (int i = 0; i < rowMatrixA; i++)
+            {
+                for (j = 0; j < colMatrixB; j++)
+                {
+                    MatrixC[i][j]=0;
+                    for (int k = 0; k<colMatrixA; k++)
+                    {
+                        MatrixC[i][j] += MatrixA[i][k]*MatrixB[k][j];
+                    }
+                    printf("%d ",MatrixC[i][j]);
+                    
+                }
+                printf("\n");
+            }
+        }
+        else
+        {
+           printf("To perform multiplication, the column number of\n Matrix A must be equal to the row number of Matrix B."); 
+        }
+    }
+    else if ( pheptinh == 32 );      /*Phep nhan A vs B*/
+    {
+        int MatrixD[rowMatrixB][colMatrixA];
+        if (colMatrixB == rowMatrixA)
+        {
+            for (int i = 0; i < rowMatrixB; i++)
+            {
+                for (j = 0; j < colMatrixA; j++)
+                {
+                    MatrixD[i][j]=0;
+                    for (int k = 0; k<colMatrixB; k++)
+                    {
+                        MatrixD[i][j] += MatrixB[i][k]*MatrixA[k][j];
+                    }
+                    printf("%d ",MatrixD[i][j]);
+                    
+                }
+                printf("\n");
+            }
+        }
+        else
+        {
+           printf("To perform multiplication, the column number of\n Matrix B must be equal to the row number of Matrix A."); 
+        }
+    }
+    
+    
+    return 0;
+}
